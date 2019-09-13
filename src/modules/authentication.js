@@ -1,6 +1,7 @@
 import axios from 'axios';
 const apiUrl = "https://127.0.0.1:8000/api";
 
+
 const state = {
     isLoading: false
 
@@ -12,7 +13,6 @@ const getters = {
 
 const actions = {
     async login({ commit, state }, payload) {
-        console.log("authentication sent!");
         commit('loadingStatus', true)
         axios.post(`${apiUrl}/login`, {
             _email: payload.email, _password: payload.password
@@ -24,7 +24,7 @@ const actions = {
             }
         })
         .catch(err => {
-            console.log(err.message);
+            payload.vm.$toast.error(err.message);
         })
         .finally(() => {
             state.isLoading = false;

@@ -1,34 +1,33 @@
 <template>
-  <div id="app">
-    <!-- <v-snackbar v-model="snackShow" top :color="snackColor">{{ snackValue }}
-      <v-btn color="white" text @click="snackShow = false">Fermer</v-btn>
-    </v-snackbar> -->
-    <Snackbar></Snackbar>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <v-app>
+      <Navbar/>
+      <v-content>
+        <v-container fluid>
+          <router-view/>
+        </v-container>
+      </v-content>
+      <!-- <v-footer app>
+        
+      </v-footer> -->
+    </v-app>
 </template>
 <script>
-import { mapMutations } from 'vuex';
-import Snackbar from './components/Snackbar';
+import Navbar from './components/app/Navbar';
+
+
 export default {
   components: {
-    Snackbar
+    Navbar
   },
-  data () {
-    return {snackName: ''}
+  data() {
+    return {
+      
+    }
   },
-  methods: {
-    snackTime: function (snack) {
-      this.setSnack(this.snackName)
-    },
-    ...mapMutations({
-      setSnack: 'app/setSnack'
-    })
-  }
+  computed: {
+
+  },
+  
 }
 </script>
 <style lang="scss">

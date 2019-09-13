@@ -1,6 +1,6 @@
 
 const state = {
-    snack: ''
+    drawer: false
 }
 
 const getters = {
@@ -8,12 +8,14 @@ const getters = {
 }
 
 const actions = {
-    
+    // drawer({ commit }, val) {
+    //     commit('drawer');
+    // }
 }
 
 const mutations = {
-    setSnack (state, snack) {
-        state.snack = snack
+    drawer(state) {
+        state.drawer = !state.drawer;
     }
 }
 

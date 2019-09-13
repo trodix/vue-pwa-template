@@ -1,19 +1,28 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vuetify, { VSnackbar } from 'vuetify/lib';
+import colors from 'vuetify/lib/util/colors'
+import VuetifyToast from 'vuetify-toast-snackbar';
 
 Vue.use(Vuetify, {
   theme: {
     themes: {
       light: {
-        primary: '#3f51b5',
-        secondary: '#b0bec5',
-        accent: '#8c9eff',
-        error: '#b71c1c',
-        success: '#4bb543'
+        primary: colors.purple,
+        secondary: colors.grey.darken1,
+        accent: colors.shades.black,
+        error: colors.red.accent3,
+      },
+      dark: {
+        primary: colors.blue.lighten3,
       },
     },
   },
+  components: {
+    VSnackbar
+  }
 });
+
+Vue.use(VuetifyToast);
 
 export default new Vuetify({
   icons: {
