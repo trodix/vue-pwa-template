@@ -1,6 +1,7 @@
 
 const state = {
-    drawer: false
+    drawer: false,
+    isLoading: false
 }
 
 const getters = {
@@ -8,12 +9,13 @@ const getters = {
 }
 
 const actions = {
-    // drawer({ commit }, val) {
-    //     commit('drawer');
-    // }
+
 }
 
 const mutations = {
+    loadingStatus(state, value) {
+        state.isLoading = value;
+    },
     drawer(state) {
         state.drawer = !state.drawer;
     }

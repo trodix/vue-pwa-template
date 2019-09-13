@@ -1,10 +1,10 @@
-import axios from 'axios';
-const apiUrl = "https://127.0.0.1:8000/api";
-
+import loginService from '../services/auth/loginService';
+import router from '../router'
 
 const state = {
-    isLoading: false
-
+    user: {},
+    token: localStorage.getItem('token') || '',
+    status: ''
 };
 
 const getters = {
@@ -12,29 +12,41 @@ const getters = {
 };
 
 const actions = {
-    async login({ commit, state }, payload) {
-        commit('loadingStatus', true)
-        axios.post(`${apiUrl}/login`, {
-            _email: payload.email, _password: payload.password
-        })
+    async login({ commit }, payload) {
+        commit('app/loadingStatus', true, { root: true })
+        loginService.login(
+            {
+                _email: payload.email,
+                _password: payload.password, 
+            })
         .then(response => {
             if(response.status == 200) {
-                const user = response.data;
-                return commit({user});
+                const user = response.data.user;
+                const token = response.data.token;
+                localStorage.setItem('token', token)
+                commit('auth_success', {user, token});
+                router.push('/')
             }
         })
         .catch(err => {
             payload.vm.$toast.error(err.message);
+            localStorage.removeItem('token')
+            commit('auth_error')
         })
         .finally(() => {
-            state.isLoading = false;
+            commit('app/loadingStatus', false, { root: true })
         })
     }
 };
 
 const mutations = {
-    loadingStatus(state, value) {
-        state.isLoading = value;
+    auth_success(state, payload) {
+        state.user = payload.user,
+        state.token = payload.token
+    },
+    auth_error(state) {
+        state.user = {};
+        state.token = '';
     }
 };
 
