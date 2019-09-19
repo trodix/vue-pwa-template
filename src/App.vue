@@ -13,7 +13,7 @@
 </template>
 <script>
 import Navbar from './components/app/Navbar';
-
+import axios from './axios.config';
 
 export default {
   components: {
@@ -27,6 +27,16 @@ export default {
   computed: {
 
   },
+  created: () => {
+    axios.interceptors.response.use(undefined, function (err) {
+      return new Promise(function (resolve, reject) {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch('authentication/logout')
+        }
+        throw err;
+      });
+    });
+  }
   
 }
 </script>

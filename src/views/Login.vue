@@ -56,12 +56,12 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoading: state => state.authentication.isLoading,
+      isLoading: state => state.app.isLoading,
     })
   },
   methods: {
-    login(email, password) {
-      this.$store.dispatch('authentication/login', { email, password, vm: this })
+    login() {
+      this.$store.dispatch('authentication/login', { email: this.email, password: this.password, vm: this })
     }
   },
 }
