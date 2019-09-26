@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <h1>Se connecter</h1>
+  <div class="register">
+    <h1>S'inscrire</h1>
     <v-row>
       <v-col cols="6">
         <v-form
@@ -21,22 +21,31 @@
             required
             hint="Au moins 8 caractères"
           >Mot de passe</v-text-field>
+          <v-text-field
+            v-model="passwordRepeat"
+            :rules="rules.passwordRepeatRules"
+            label="Confirmer mot de passe"
+            required
+            hint="Au moins 8 caractères"
+          >Confirmer mot de passe</v-text-field>
           <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
           <v-btn
             :disabled="!valid"
             color="success"
             class="mr-4"
-            @click="login"
+            @click="register"
           >
-            Connexion
+            Créer mon compte
           </v-btn>
         </v-form>
       </v-col>
     </v-row>
   </div>
 </template>
+
 <script lang="js">
 import { mapActions, mapState, mapMutations } from 'vuex'
+
 
 export default {
   data() {
@@ -45,6 +54,7 @@ export default {
       lazy: false,
       email: '',
       password: '',
+      passwordRepeat: '',
       "rules": {
         emailRules: [
           v => !!v || 'Adresse mail est requis',
@@ -52,6 +62,9 @@ export default {
         ],
         passwordRules: [
           v => v.length >= 8 || 'Votre mot de passe doit contenir au moins 8 caractères',
+        ],
+        passwordRepeatRules: [
+          v => this.passwordRepeat === this.password || 'Votre mot de passe doit correspondre',
         ],
       }
     }
@@ -62,12 +75,13 @@ export default {
     })
   },
   methods: {
-    login() {
-      this.$store.dispatch('authentication/login', { email: this.email, password: this.password, vm: this })
+    register() {
+      this.$store.dispatch('authentication/register', { email: this.email, password: this.password, vm: this });
     }
   },
 }
 </script>
+
 <style lang="scss" scoped>
 
 </style>
