@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1>Se connecter</h1>
+    <h1>{{ $t('login.h1') }}</h1>
     <v-row>
       <v-col cols="6">
         <v-form
@@ -11,9 +11,9 @@
           <v-text-field 
             v-model="email"
             :rules="rules.emailRules"
-            label="Adresse mail"
+            :label="$t('login.email.label')"
             required
-          >Adresse mail</v-text-field>
+          >{{ $t('login.email.label') }}</v-text-field>
           <v-text-field
             v-model="password"
             type="password"

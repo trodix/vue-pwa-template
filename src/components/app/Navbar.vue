@@ -24,6 +24,7 @@
                     <v-icon>mdi-account</v-icon>
                 </v-btn>
             </template>
+            <v-select :items="langs" label="Langue" @select="changeLang" v-model="$i18n.locale"></v-select>
         </v-app-bar>
         <Drawer/>
    </div> 
@@ -39,7 +40,10 @@ export default {
     
     data() {
         return {
-
+            langs: [
+                "fr",
+                "en"
+            ]
         }
     },
     computed: {
@@ -55,6 +59,9 @@ export default {
         logout() {
             this.$store.dispatch('authentication/logout')
             console.log("Logout", this.isLoggedIn)
+        },
+        changeLang() {
+            this.$i18n.locale = this.lang
         }
     }
     

@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import NotFound from './views/NotFound.vue'
 import store from './modules/authentication'
+import i18n from './i18n'
 
 Vue.use(Router)
 
@@ -65,6 +66,13 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-})
+});
+
+
+
+
+
+
+
 
 export default router;

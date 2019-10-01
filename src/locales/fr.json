@@ -1,0 +1,8 @@
+{
+  "login": {
+    "email": {
+      "label": "Adresse mail"
+    },
+    "h1": "Se connecter"
+  }
+}
