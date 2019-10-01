@@ -16,6 +16,7 @@
           >Adresse mail</v-text-field>
           <v-text-field
             v-model="password"
+            type="password"
             :rules="rules.passwordRules"
             label="Mot de passe"
             required

@@ -1,4 +1,4 @@
-import loginService from '../services/auth/loginService';
+import authService from '../services/auth/authentication.service';
 import router from '../router'
 import axios from '../axios.config'
 
@@ -18,8 +18,8 @@ const getters = {
 
 const actions = {
     async login({ commit }, payload) {
-        commit('app/loadingStatus', true, { root: true })
-        loginService.login(
+        commit('app/loadingStatus', true, { root: true });
+        authService.login(
             {
                 _email: payload.email,
                 _password: payload.password, 
@@ -45,10 +45,41 @@ const actions = {
     },
     logout({commit}){
         return new Promise((resolve, reject) => {
+          console.log("logout action");
           commit('logout');
           localStorage.removeItem('token');
           delete axios.defaults.headers.common['Authorization'];
+          location.reload();
           resolve();
+        })
+    },
+    async register({commit}, payload) {
+        commit('app/loadingStatus', true, { root: true });
+        authService.register(
+            {
+                _email: payload.email,
+                _password: payload.password,
+                _passwordConfirm: payload.passwordConfirm,
+                _lastname: payload.lastname,
+                _firstname: payload.firstname
+            })
+        .then(response => {
+            if(response.status == 201) {
+                const user = response.data.user;
+                const token = response.data.token;
+                const roles = response.data.roles;
+                localStorage.setItem('token', token);
+                commit('auth_success', {user, token, roles});
+                router.push('/');
+            }
+        })
+        .catch(err => {
+            payload.vm.$toast.error(err.message);
+            localStorage.removeItem('token');
+            commit('auth_error');
+        })
+        .finally(() => {
+            commit('app/loadingStatus', false, { root: true });
         })
     }
 };

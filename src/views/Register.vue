@@ -9,6 +9,18 @@
           :lazy-validation="lazy"
         >
           <v-text-field 
+            v-model="lastname"
+            :rules="rules.lastnameRules"
+            label="Nom"
+            required
+          >Nom</v-text-field>
+          <v-text-field 
+            v-model="firstname"
+            :rules="rules.firstnameRules"
+            label="Prénom"
+            required
+          >Prénom</v-text-field>
+          <v-text-field 
             v-model="email"
             :rules="rules.emailRules"
             label="Adresse mail"
@@ -16,6 +28,7 @@
           >Adresse mail</v-text-field>
           <v-text-field
             v-model="password"
+            type="password"
             :rules="rules.passwordRules"
             label="Mot de passe"
             required
@@ -23,6 +36,7 @@
           >Mot de passe</v-text-field>
           <v-text-field
             v-model="passwordRepeat"
+            type="password"
             :rules="rules.passwordRepeatRules"
             label="Confirmer mot de passe"
             required
@@ -55,6 +69,8 @@ export default {
       email: '',
       password: '',
       passwordRepeat: '',
+      lastname: '',
+      firstname: '',
       "rules": {
         emailRules: [
           v => !!v || 'Adresse mail est requis',
@@ -66,6 +82,12 @@ export default {
         passwordRepeatRules: [
           v => this.passwordRepeat === this.password || 'Votre mot de passe doit correspondre',
         ],
+        lastnameRules: [
+          v => v.length < 20 || '20 caractères maximum',
+        ],
+        firstnameRules: [
+          v => v.length < 20 || '20 caractères maximum',
+        ]
       }
     }
   },
@@ -76,7 +98,16 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch('authentication/register', { email: this.email, password: this.password, vm: this });
+      this.$store.dispatch('authentication/register', 
+        { 
+          email: this.email, 
+          password: this.password, 
+          passwordConfirm: this.passwordRepeat,
+          lastname: this.lastname,
+          firstname: this.firstname,
+          vm: this 
+        }
+      );
     }
   },
 }
