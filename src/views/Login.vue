@@ -11,17 +11,17 @@
           <v-text-field 
             v-model="email"
             :rules="rules.emailRules"
-            :label="$t('login.email.label')"
+            :label="$t('login.email')"
             required
           >{{ $t('login.email.label') }}</v-text-field>
           <v-text-field
             v-model="password"
             type="password"
             :rules="rules.passwordRules"
-            label="Mot de passe"
+            :label="$t('login.password')"
             required
             hint="Au moins 8 caractères"
-          >Mot de passe</v-text-field>
+          >{{ $t('login.password') }}</v-text-field>
           <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
           <v-btn
             :disabled="!valid"
@@ -29,7 +29,7 @@
             class="mr-4"
             @click="login"
           >
-            Connexion
+            {{ $t('login.connect') }}
           </v-btn>
         </v-form>
       </v-col>
@@ -48,7 +48,7 @@ export default {
       password: '',
       "rules": {
         emailRules: [
-          v => !!v || 'Adresse mail est requis',
+          v => !!v || 'Adresse mail est requis', // $t('login.rules.email.required'), don't work for translating rules :/
           v => /.+@.+\..+/.test(v) || 'Adresse mail doit être valide',
         ],
         passwordRules: [

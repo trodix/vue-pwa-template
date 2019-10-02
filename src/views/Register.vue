@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <h1>S'inscrire</h1>
+    <h1>{{ $t('register.h1') }}</h1>
     <v-row>
       <v-col cols="6">
         <v-form
@@ -11,37 +11,37 @@
           <v-text-field 
             v-model="lastname"
             :rules="rules.lastnameRules"
-            label="Nom"
+            :label="$t('register.lastname')"
             required
-          >Nom</v-text-field>
+          >{{ $t('register.lastname') }}</v-text-field>
           <v-text-field 
             v-model="firstname"
             :rules="rules.firstnameRules"
-            label="Prénom"
+            :label="$t('register.firstname')"
             required
-          >Prénom</v-text-field>
+          >{{ $t('register.firstname') }}</v-text-field>
           <v-text-field 
             v-model="email"
             :rules="rules.emailRules"
-            label="Adresse mail"
+            :label="$t('login.email')"
             required
-          >Adresse mail</v-text-field>
+          >{{ $t('login.email') }}</v-text-field>
           <v-text-field
             v-model="password"
             type="password"
             :rules="rules.passwordRules"
-            label="Mot de passe"
+            :label="$t('login.password')"
             required
-            hint="Au moins 8 caractères"
-          >Mot de passe</v-text-field>
+            :hint="$t('register.hint.password')"
+          >{{ $t('login.password') }}</v-text-field>
           <v-text-field
             v-model="passwordRepeat"
             type="password"
             :rules="rules.passwordRepeatRules"
-            label="Confirmer mot de passe"
+            :label="$t('register.passwordRepeat')"
             required
-            hint="Au moins 8 caractères"
-          >Confirmer mot de passe</v-text-field>
+            :hint="$t('register.hint.password')"
+          >{{ $t('register.passwordRepeat') }}</v-text-field>
           <v-progress-circular indeterminate v-if="isLoading"></v-progress-circular>
           <v-btn
             :disabled="!valid"
@@ -49,7 +49,7 @@
             class="mr-4"
             @click="register"
           >
-            Créer mon compte
+            {{ $t('register.createAccount') }}
           </v-btn>
         </v-form>
       </v-col>

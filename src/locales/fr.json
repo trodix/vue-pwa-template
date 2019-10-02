@@ -1,8 +1,23 @@
 {
   "login": {
-    "email": {
-      "label": "Adresse mail"
-    },
-    "h1": "Se connecter"
+    "email": "Adresse mail",
+    "h1": "Se connecter",
+    "password": "Mot de passe",
+    "connect": "Connexion",
+    "rules": {
+      "email": {
+        "required": "Adresse mail est requis"
+      }
+    }
+  },
+  "register": {
+    "h1": "S'inscrire",
+    "lastname": "Nom",
+    "firstname": "Prénom",
+    "passwordRepeat": "Confirmer le mot de passe",
+    "createAccount": "Créer mon compte",
+    "hint": {
+      "password": "Au moins 8 caractères"
+    }
   }
 }
