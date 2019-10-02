@@ -1,5 +1,10 @@
 # vue-pwa-template
 
+## Documentation
+
+* [Toast](/documentation/Toast.md)
+* [Translation](/documentation/Translation.md)
+
 ## Project setup
 ```
 npm install
@@ -37,29 +42,3 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Memo
-
-### Display a notification
-See https://github.com/eolant/vuetify-toast-snackbar
-
-### Inside a component
-
-```js
-// possible colors: success / error / info / warning
-this.$toast.success('login page')
-```
-
-### Insite the store
-
-myComponent.vue
-```js
-this.$store.dispatch('mymodule/myaction', { myProp, vm: this })
-```
-
-myModule.js
-```js
-async login({ commit, state }, payload) {
-    payload.vm.$toast.error(err.message);
-}
-```
